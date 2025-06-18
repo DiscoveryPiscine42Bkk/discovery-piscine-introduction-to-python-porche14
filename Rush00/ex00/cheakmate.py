@@ -29,9 +29,37 @@ def is_in_check(board):
       x,y = kx + dx , ky + dy
       while 0 <= x < n and 0 <= y < n:
         if board [x][y]!= '.': #If we hit a piece 
-          if board [x][y] == 'B' or board [x][y]== 'Q':
+          if board [x][y] == 'R' or board [x][y]== 'Q':
             return "Success" 
           break 
         x,y = x + dx , y + dy
 
+    #Check for attacks form Bishop and Queens (diagonal)
+    for dx,dy in bishop_directions:
+     x,y = kx + dx , ky + dy
+     while 0 <= x < n and 0 <= y < n:
+       if board  [x][y]!= '.': #If we hit piece
+         if board [x][y] == 'B' or board [x][y]== 'Q':
+           return "Success"
+         break
+       x,y = x + dx , y + dy
 
+    #Check for attacks form Pawns and Queens (diagonal)
+    for dx,dy in pawn_directions:
+     x,y = kx + dx , ky + dy
+     if 0 <= x < n and 0 <= y < n:
+       if board [x][y] == 'P':
+         return "Success"
+    
+    return "Fail"
+   board1 = [
+     ['.'],['.'],['.'],['.'],['.'],['.'],['.'],['.'] 
+     ['.'],['.'],['.'],['R'],['.'],['.'],['.'],['.']
+     ['.'],['.'],['.'],['k'],['.'],['.'],['.'],['.']
+     ['.'],['.'],['.'],['.'],['.'],['.'],['.'],['.']
+     ['.'],['.'],['.'],['.'],['.'],['.'],['.'],['.']
+     ['.'],['.'],['.'],['.'],['.'],['.'],['.'],['.']
+     ['.'],['.'],['.'],['.'],['.'],['.'],['.'],['.']
+     ['.'],['.'],['.'],['.'],['.'],['.'],['.'],['.']
+   ]
+print(is_in_check('board1'))
